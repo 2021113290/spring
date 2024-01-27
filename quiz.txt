@@ -1,0 +1,50 @@
+###学习spring中一些疑问及解答
+1.如果类名首字母是小写，怎么从spring中获取bean？
+> 和首字母是大写是一致的，都使用将类名首字母小写的方式来获取对象
+
+2.如果首字母和第二字母都是大写，会怎样？
+> 当使用默认规则，首字母小写获取bean对象时，失败！
+> 使用原类名，可以成功获取对象
+
+**解释：查看spring源码，AnnotationBeanNameGenerator.class-->generateBeanName()-->buildDefaultBeanName()-->buildDefaultBeanName()-->decapitalize(),
+阅读decapitalize()该方法，发现这是jdk的约定
+ public static String decapitalize(String name) {
+        if (name == null || name.length() == 0) {
+            return name;
+        }
+        if (name.length() > 1 && Character.isUpperCase(name.charAt(1)) &&
+                        Character.isUpperCase(name.charAt(0))){
+            return name;
+        }
+        char chars[] = name.toCharArray();
+        chars[0] = Character.toLowerCase(chars[0]);
+        return new String(chars);
+    }
+
+3.项目中没有目录，所有的类都写在java根路径下，怎么存取bean对象？
+> 修改spring-config.xml，base-package="**"
+
+4.为什么需要5大类注解？
+>通过类注解了解类的用途
+>功能细微不同
+
+五大注解用途：
+@Controller:归属于业务逻辑层，用来控制用户的行为，用来检查用户参数的有效性
+@Service:归属于服务层，调用持久化类实现响应功能
+@Repository:归属于持久层，直接与数据库交互，通常每个表对应一个@Repository
+@Configuration:归属于配置层，用来配置当前项目的一些信息
+@Component:归属于公共工具类，提供公共方法
+
+5.五大注解关系：
+@Component是其他四个注解的父类
+
+6.spring有几种注入方式？有什么区别？
+
+7.@Resource和@Autowired
+相同点：都是用来实现依赖注入
+不同点：
+    1.出身不同：@Autowired 来⾃于 Spring，⽽ @Resource 来⾃于 JDK 的注解；
+    2.使⽤时设置的参数不同：相⽐于 @Autowired 来说，@Resource ⽀持更多的参数设置，例如
+    name 设置，根据名称获取 Bean。
+    3.@Autowired 可⽤于 Setter 注⼊、构造函数注⼊和属性注⼊，⽽ @Resource 只能⽤于 Setter 注
+    ⼊和属性注⼊，不能⽤于构造函数注⼊
