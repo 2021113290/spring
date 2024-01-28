@@ -7,14 +7,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
+//    private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+//    public UserService(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
+//    public User getUser(){
+//       return userRepository.user1();
+//    }
+
+    public UserService() {
+        System.out.println("调用 User Service 构造⽅法");
     }
-
-    public User getUser(){
-       return userRepository.user1();
+    public void sayHi(){
+        System.out.println("User Service SayHi.");
     }
 
 }

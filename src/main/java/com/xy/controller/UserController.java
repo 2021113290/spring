@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 @Controller
@@ -19,14 +20,19 @@ public class UserController {
 //    public User getUser() {
 //        return user;
 //    }
-
+    @Resource
     private UserService userService;
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    public User getUser() {
-        return userService.getUser();
+//    @Autowired
+//    public UserController(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    public User getUser() {
+//        return userService.getUser();
+//    }
+    @PostConstruct
+    public void postConstruct() {
+        userService.sayHi();
+        System.out.println("执⾏ User Controller 构造⽅法");
     }
 }

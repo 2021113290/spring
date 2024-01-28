@@ -37,8 +37,8 @@ public class App {
 //        StudentController sc=context.getBean("studentController",StudentController.class);
 //        sc.sayhi();
         UserController uc=context.getBean("userController", UserController.class);
-        System.out.println(uc.getUser().toString());
-
+//        System.out.println(uc.getUser().toString());
+        uc.postConstruct();
     }
 
 }
