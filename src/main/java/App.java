@@ -1,5 +1,6 @@
 import com.xy.AppleController;
 import com.xy.controller.StudentController;
+import com.xy.controller.UserController;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -33,8 +34,11 @@ public class App {
 
 //        User user1=context.getBean("user",User.class);
 //        System.out.println(user1.sayHi("yu"));
-        StudentController sc=context.getBean("studentController",StudentController.class);
-        sc.sayhi();
+//        StudentController sc=context.getBean("studentController",StudentController.class);
+//        sc.sayhi();
+        UserController uc=context.getBean("userController", UserController.class);
+        System.out.println(uc.getUser().toString());
+
     }
 
 }

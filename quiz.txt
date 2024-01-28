@@ -48,3 +48,56 @@
     name 设置，根据名称获取 Bean。
     3.@Autowired 可⽤于 Setter 注⼊、构造函数注⼊和属性注⼊，⽽ @Resource 只能⽤于 Setter 注
     ⼊和属性注⼊，不能⽤于构造函数注⼊
+
+8.解决同⼀个类型，多个 bean 的解决⽅案有以下两个：
+  使⽤ @Resource(name="user1") 定义。
+  使⽤ @Qualifier 注解定义名称。
+
+9.lombok：简化java开发的一个工具，更简单的替换java代码的一个工具
+依赖-插件
+
+10.bean作用域分类：
+ (1.singleton:单例作用域
+ 场景：通常⽆状态的Bean使⽤该作⽤域。⽆状态表示Bean对象的属性状态不需要更新
+ 备注：Spring默认选择该作⽤域
+ (2.prototype:原型模式（多例模式）
+ 景：通常有状态的Bean使⽤该作⽤域
+ (3.request
+ 场景：⼀次http的请求和响应的共享Bean
+ 备注：限定SpringMVC中使⽤
+ (4.session:
+ 场景：⽤户回话的共享Bean, ⽐如：记录⼀个⽤户的登陆信息
+ 备注：限定SpringMVC中使⽤
+ (5.application:
+ 场景：Web应⽤的上下⽂信息，⽐如：记录⼀个应⽤的共享信息
+ 备注：限定SpringMVC中使⽤
+ (6.websocket:
+ 场景：WebSocket的每次会话中，保存了⼀个Map结构的头信息，将⽤来包裹客户端消息头。第⼀
+ 次初始化后，直到WebSocket结束都是同⼀个Bean。
+ 备注：限定Spring WebSocket中使⽤
+ 区别：
+ singleton 是 Spring Core 的作⽤域；application 是 Spring Web 中的作⽤域；
+ singleton 作⽤于 IoC 的容器，⽽ application 作⽤于 Servlet 容器
+
+11.Spring执行流程
+ 1).启动容器（启动项目）
+ 2).读取配置文件，初始化
+    i).使用xml直接注册bean
+    ii).配置bean根（扫描）路径
+ 3).将bean存储到spring中，通过类注解进行扫描和装配
+ 4).将bean从spring读取出来，装配到相应的类
+
+12.bean生命周期
+1.实例化 Bean（为 Bean 分配内存空间）
+2.设置属性（Bean 注⼊和装配）
+3.Bean 初始化
+实现了各种 Aware 通知的⽅法，如 BeanNameAware、BeanFactoryAware
+ApplicationContextAware 的接⼝⽅法；
+执⾏ BeanPostProcessor 初始化前置⽅法；
+执⾏ @PostConstruct 初始化⽅法，依赖注⼊操作之后被执⾏；
+执⾏⾃⼰指定的 init-method ⽅法（如果有指定的话）；
+执⾏ BeanPostProcessor 初始化后置⽅法。
+4.使⽤ Bean
+5.销毁 Bean
+
+
